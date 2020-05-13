@@ -9,10 +9,13 @@ public class Dog {
     private int tiredLevel;
     private int boredLevel;
     private int dirtyLevel;
+    private int trustLevel;
     private int age;
     private String name;
     private Gender gender;
     private boolean isNeutered;
+
+
 
     public Dog(String name, Gender gender){
         hitPoints = 100;
@@ -23,6 +26,7 @@ public class Dog {
         tiredLevel = 0;
         boredLevel = 0;
         dirtyLevel = 0;
+        trustLevel = 25;
         age = 1;
         this.name = name;
         this.gender = gender;
@@ -35,7 +39,9 @@ public class Dog {
 
     public void giveBath(){
         dirtyLevel = 0;
-
+        tiredLevel = tiredLevel + 5;
+        emotion = Emotion.MAD;
+        trustLevel -= 5;
     }
 
     public void timePassesForDog(){
@@ -46,7 +52,6 @@ public class Dog {
         hungerLevel += 5;
         tiredLevel += 5;
         thirstLevel += 5;
-
     }
 
     public void takeAWalk(){
@@ -100,6 +105,58 @@ public class Dog {
                 ", gender=" + gender +
                 ", isNeutered=" + isNeutered +
                 '}';
+    }
+
+    public int getHitPoints() {
+        return hitPoints;
+    }
+
+    public int getHungerLevel() {
+        return hungerLevel;
+    }
+
+    public int getThirstLevel() {
+        return thirstLevel;
+    }
+
+    public int getLonelyLevel() {
+        return lonelyLevel;
+    }
+
+    public int getTiredLevel() {
+        return tiredLevel;
+    }
+
+    public int getBoredLevel() {
+        return boredLevel;
+    }
+
+    public int getDirtyLevel() {
+        return dirtyLevel;
+    }
+
+    public void setDirtyLevel(int dirtyLevel) {
+        this.dirtyLevel = dirtyLevel;
+    }
+
+    public int getTrustLevel() {
+        return trustLevel;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public Emotion getEmotion() {
+        return emotion;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public boolean isNeutered() {
+        return isNeutered;
     }
 }
 

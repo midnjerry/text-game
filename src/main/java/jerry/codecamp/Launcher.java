@@ -7,12 +7,6 @@ public class Launcher {
         Scanner scanner = new Scanner(System.in);
         boolean shouldGameRun = true;
         Dog dog = new Dog("Zoe", Gender.FEMALE);
-        Dog dog2 = new Dog("Boo", Gender.FEMALE);
-        Dog dog3 = new Dog("Barko", Gender.MALE);
-
-
-        System.out.println("The dog's name is: " + dog.getName());
-        System.out.println("The second dog's name is: " + dog2.getName());
 
         System.out.println("Welcome to the Adventures of Zoe and Boo");
         System.out.println();
