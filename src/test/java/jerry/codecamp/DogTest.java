@@ -108,7 +108,7 @@ public class DogTest {
     }
 
     @Test
-    public void timePassesForDog_decreasesHungerLevel() {
+    public void timePassesForDog_increasesHungerLevel() {
         dog.timePassesForDog();
         assertEquals(5, dog.getHungerLevel());
 
@@ -135,7 +135,7 @@ public class DogTest {
     }
 
     @Test
-    public void giveTheDogASnack_increasesHungerLevel() {
+    public void giveTheDogASnack_decreasesHungerLevel() {
         dog.setHungerLevel(20);
         dog.giveTheDogASnack();
         assertEquals(10, dog.getHungerLevel());
