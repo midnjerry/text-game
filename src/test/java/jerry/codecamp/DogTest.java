@@ -136,21 +136,22 @@ public class DogTest {
 
     @Test
     public void giveTheDogASnack_increasesHungerLevel() {
+        dog.setHungerLevel(20);
         dog.giveTheDogASnack();
-        assertEquals(- 10, dog.getHungerLevel());
+        assertEquals(10, dog.getHungerLevel());
 
         dog.giveTheDogASnack();
-        assertEquals(-20, dog.getHungerLevel());
-
+        assertEquals(0, dog.getHungerLevel());
     }
 
     @Test
-    public void giveTheDogASnack_increasesLonelyLevel() {
+    public void giveTheDogASnack_decreasesLonelyLevel() {
+        dog.setLonelyLevel(20);
         dog.giveTheDogASnack();
-        assertEquals(-10, dog.getLonelyLevel());
+        assertEquals(10, dog.getLonelyLevel());
 
         dog.giveTheDogASnack();
-        assertEquals(-20, dog.getLonelyLevel());
+        assertEquals(0, dog.getLonelyLevel());
     }
 
     @Test
@@ -160,13 +161,6 @@ public class DogTest {
 
         dog.giveTheDogASnack();
         assertEquals(10, dog.getDirtyLevel());
-
-        // hungerLevel -= 10;
-        //        lonelyLevel -= 10;
-        //        dirtyLevel += 5;
-        //        thirstLevel += 5;
-        //        boredLevel -= 5;
-
     }
 
     @Test
@@ -179,11 +173,12 @@ public class DogTest {
     }
 
     @Test
-    public void giveTheDogASnack_increasesBoredLevel() {
+    public void giveTheDogASnack_decreasesBoredLevel() {
+        dog.setBoredLevel(20);
         dog.giveTheDogASnack();
-        assertEquals(-5, dog.getBoredLevel());
+        assertEquals(15, dog.getBoredLevel());
 
         dog.giveTheDogASnack();
-        assertEquals(-10, dog.getBoredLevel());
+        assertEquals(10, dog.getBoredLevel());
     }
 }

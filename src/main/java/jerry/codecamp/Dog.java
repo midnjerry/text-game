@@ -16,8 +16,7 @@ public class Dog {
     private boolean isNeutered;
 
 
-
-    public Dog(String name, Gender gender){
+    public Dog(String name, Gender gender) {
         hitPoints = 100;
         emotion = Emotion.HAPPY;
         hungerLevel = 0;
@@ -33,18 +32,18 @@ public class Dog {
         this.isNeutered = false;
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 
-    public void giveBath(){
+    public void giveBath() {
         dirtyLevel = 0;
         tiredLevel = tiredLevel + 5;
         emotion = Emotion.MAD;
         trustLevel -= 5;
     }
 
-    public void timePassesForDog(){
+    public void timePassesForDog() {
         boredLevel += 5;
         lonelyLevel += 5;
         age += 1;
@@ -54,7 +53,7 @@ public class Dog {
         thirstLevel += 5;
     }
 
-    public void takeAWalk(){
+    public void takeAWalk() {
         System.out.println("You take " + name + " out on a walk.");
         tiredLevel += 10;
         dirtyLevel += 5;
@@ -64,11 +63,11 @@ public class Dog {
         boredLevel = 0;
     }
 
-    public void petTheDog(){
+    public void petTheDog() {
         System.out.println("You pet " + name + ".");
     }
 
-    public void giveTheDogASnack(){
+    public void giveTheDogASnack() {
         System.out.println("You give " + name + " a nice piece of beef jerky.");
         hungerLevel -= 10;
         lonelyLevel -= 10;
@@ -83,7 +82,7 @@ public class Dog {
      *
      * @return true if the dog comes to you. false if not.
      */
-    public boolean callTheDog(){
+    public boolean callTheDog() {
         System.out.println("You call " + name + " and wait for her to come over.");
 
         return false;
@@ -137,6 +136,16 @@ public class Dog {
 
     public void setDirtyLevel(int dirtyLevel) {
         this.dirtyLevel = dirtyLevel;
+    }
+
+    public void setBoredLevel(int level) {
+        boredLevel = level;
+    }
+    public void setLonelyLevel(int level) {
+        lonelyLevel = level;
+    }
+    public void setHungerLevel(int level){
+        hungerLevel = level;
     }
 
     public int getTrustLevel() {
