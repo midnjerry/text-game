@@ -14,6 +14,7 @@ public class Dog {
     private String name;
     private Gender gender;
     private boolean isNeutered;
+    private boolean isAlive;
 
 
     public Dog(String name, Gender gender) {
@@ -30,6 +31,11 @@ public class Dog {
         this.name = name;
         this.gender = gender;
         this.isNeutered = false;
+        this.isAlive = true;
+    }
+
+    public boolean isAlive() {
+        return isAlive;
     }
 
     public String getName() {
@@ -43,7 +49,20 @@ public class Dog {
         trustLevel -= 5;
     }
 
+    public void beatDog() {
+        hitPoints -= 20;
+        trustLevel -= 30;
+        if (trustLevel > 50) {
+            emotion = Emotion.SAD;
+        } else {
+            emotion = Emotion.MAD;
+        }
+        dirtyLevel += 5;
+        lonelyLevel += 5;
+    }
+
     public void timePassesForDog() {
+        System.out.println("Time passes for " + name + "!");
         boredLevel += 5;
         lonelyLevel += 5;
         age += 1;
@@ -51,6 +70,14 @@ public class Dog {
         hungerLevel += 5;
         tiredLevel += 5;
         thirstLevel += 5;
+        if (hitPoints <= 0) {
+            killDog();
+        }
+    }
+
+    public void killDog() {
+        isAlive = false;
+
     }
 
     public void takeAWalk() {
@@ -61,6 +88,7 @@ public class Dog {
         hungerLevel += 10;
         lonelyLevel = 0;
         boredLevel = 0;
+        trustLevel += 5;
     }
 
     public void petTheDog() {
@@ -141,10 +169,12 @@ public class Dog {
     public void setBoredLevel(int level) {
         boredLevel = level;
     }
+
     public void setLonelyLevel(int level) {
         lonelyLevel = level;
     }
-    public void setHungerLevel(int level){
+
+    public void setHungerLevel(int level) {
         hungerLevel = level;
     }
 
@@ -166,6 +196,21 @@ public class Dog {
 
     public boolean isNeutered() {
         return isNeutered;
+    }
+
+    public void displayHealth() {
+        System.out.println("Name: " + name);
+        System.out.println("==================================================");
+        System.out.println("HitPoints: " + hitPoints);
+        System.out.print("Energy: " + (100-tiredLevel));
+        System.out.print("\tLove: " + trustLevel);
+        System.out.print("\tHydration: " + thirstLevel);
+        System.out.println("\tEmotion: " + emotion);
+        System.out.print("Filth: " + dirtyLevel);
+        System.out.print("\tHunger: " + hungerLevel);
+        System.out.print("\tBoredom: " + boredLevel);
+        System.out.println("\tLoneliness: " + lonelyLevel);
+        System.out.println("==================================================");
     }
 }
 

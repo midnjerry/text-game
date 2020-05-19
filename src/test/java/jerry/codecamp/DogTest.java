@@ -38,6 +38,7 @@ public class DogTest {
         assertEquals(1, dog.getAge());
         assertEquals(false, dog.isNeutered());
         assertEquals(Gender.MALE, dog.getGender());
+        assertEquals(true, dog.isAlive());
     }
 
     @Test
