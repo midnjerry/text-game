@@ -29,14 +29,14 @@ public class Game {
     }
 
     private void checkForDeath() {
-        if (!dog.isAlive()){
-            shouldGameRun  = false;
-            System.out.println("Your dog is dead.  :(");
+        if (!dog.isAlive()) {
+            shouldGameRun = false;
+            System.out.println(dog.getName() + " is dead. :(");
         }
     }
 
-    private void processTick(){
-        if (tickCounter == 3){
+    private void processTick() {
+        if (tickCounter == 3) {
             dog.timePassesForDog();
             tickCounter = 0;
         }
@@ -46,36 +46,48 @@ public class Game {
     public void processMenu() {
         dog.displayHealth();
         System.out.println("What would you like to do?");
-        System.out.println("1. Pet Zoe");
-        System.out.println("2. Feed Zoe");
-        System.out.println("3. Call Zoe");
-        System.out.println("4. Play fetch with Zoe");
-        System.out.println("5. Take Zoe for a walk");
-        System.out.println("6. Beat the dog");
+        System.out.println("1. Pet " + dog.getName());
+        System.out.println("2. Feed " + dog.getName());
+        System.out.println("3. Give " + dog.getName() + " some water");
+        System.out.println("4. Give " + dog.getName() + " a bath");
+        System.out.println("5. Call " + dog.getName());
+        System.out.println("6. Play fetch with " + dog.getName());
+        System.out.println("7. Take " + dog.getName() + " for a walk");
+        System.out.println("8. Beat the " + dog.getName());
         System.out.println("Q. Quit the game");
 
         String selection = scanner.nextLine();
 
         switch (selection) {
             case ("1"):
+                System.out.println("You pet " + dog.getName() + ".");
                 dog.petTheDog();
                 break;
             case ("2"):
+                System.out.println("You give " + dog.getName() + " a nice piece of beef jerky.");
                 dog.giveTheDogASnack();
                 break;
             case ("3"):
-                dog.callTheDog();
+                dog.giveWater();
                 break;
             case ("4"):
-                System.out.println("Zoe looks at the toy, looks at you, then goes back to sleep.");
+                dog.giveBath();
                 break;
             case ("5"):
-                dog.takeAWalk();
-                System.out.println(dog);
+                System.out.println("You call " + dog.getName() + " and wait for her to come over.");
+                dog.callTheDog();
                 break;
             case ("6"):
+                System.out.println(dog.getName() + " looks at the toy, looks at you, then goes back to sleep.");
+                dog.playFetch();
+                break;
+            case ("7"):
+                dog.takeAWalk();
+                System.out.println("You take " + dog.getName() + " for a walk");
+                break;
+            case ("8"):
                 dog.beatDog();
-                System.out.println("you hit the dog");
+                System.out.println("you hit " + dog.getName());
                 break;
             case ("q"):
             case ("Q"):
@@ -85,7 +97,7 @@ public class Game {
 
                 break;
             default:
-                System.out.println("Zoe gives you an empty stare, and runs away.");
+                System.out.println(dog.getName() + " gives you an empty stare, and runs away.");
         }
     }
 }

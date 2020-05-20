@@ -1,5 +1,7 @@
 package jerry.codecamp;
 
+import javax.swing.*;
+
 public class Dog {
     private int hitPoints;
     private Emotion emotion; // sick, happy, sad, lonely, mad, nervous, excited, curious, jealous
@@ -44,32 +46,33 @@ public class Dog {
 
     public void giveBath() {
         dirtyLevel = 0;
-        tiredLevel = tiredLevel + 5;
+        tiredLevel = addValue(tiredLevel, +5);
         emotion = Emotion.MAD;
-        trustLevel -= 5;
+        trustLevel = addValue(trustLevel, -5);
+        thirstLevel = addValue(thirstLevel, -2);
     }
 
     public void beatDog() {
-        hitPoints -= 20;
-        trustLevel -= 30;
+        hitPoints = addValue(hitPoints, -20);
+        trustLevel = addValue(trustLevel, -30);
         if (trustLevel > 50) {
             emotion = Emotion.SAD;
         } else {
             emotion = Emotion.MAD;
         }
-        dirtyLevel += 5;
-        lonelyLevel += 5;
+        dirtyLevel = addValue(dirtyLevel, +5);
+        lonelyLevel = addValue(lonelyLevel, +5);
     }
 
     public void timePassesForDog() {
         System.out.println("Time passes for " + name + "!");
-        boredLevel += 5;
-        lonelyLevel += 5;
+        boredLevel = addValue(boredLevel, +5);
+        lonelyLevel = addValue(lonelyLevel, +5);
         age += 1;
-        dirtyLevel += 5;
-        hungerLevel += 5;
-        tiredLevel += 5;
-        thirstLevel += 5;
+        dirtyLevel = addValue(dirtyLevel, +5);
+        hungerLevel = addValue(hungerLevel, +5);
+        tiredLevel = addValue(tiredLevel, +5);
+        thirstLevel = addValue(thirstLevel, +5);
         if (hitPoints <= 0) {
             killDog();
         }
@@ -81,27 +84,30 @@ public class Dog {
     }
 
     public void takeAWalk() {
-        System.out.println("You take " + name + " out on a walk.");
-        tiredLevel += 10;
-        dirtyLevel += 5;
-        thirstLevel += 50;
-        hungerLevel += 10;
+        tiredLevel = addValue(tiredLevel, -5);
+        dirtyLevel = addValue(dirtyLevel, +5);
+        thirstLevel = addValue(thirstLevel, +25);
+        hungerLevel = addValue(hungerLevel, +20);
         lonelyLevel = 0;
         boredLevel = 0;
-        trustLevel += 5;
+        trustLevel = addValue(trustLevel, +5);
     }
 
     public void petTheDog() {
-        System.out.println("You pet " + name + ".");
+       dirtyLevel = addValue(dirtyLevel, +1);
+       lonelyLevel = addValue(lonelyLevel, -5);
+       boredLevel = addValue(boredLevel, -5);
+       trustLevel = addValue(trustLevel, +10);
+       emotion = Emotion.HAPPY;
     }
 
     public void giveTheDogASnack() {
-        System.out.println("You give " + name + " a nice piece of beef jerky.");
-        hungerLevel -= 10;
-        lonelyLevel -= 10;
-        dirtyLevel += 5;
-        thirstLevel += 5;
-        boredLevel -= 5;
+        hungerLevel = addValue(hungerLevel, -10);
+        lonelyLevel = addValue(lonelyLevel, -10);
+        dirtyLevel = addValue(dirtyLevel, +5);
+        thirstLevel = addValue(thirstLevel, +5);
+        boredLevel = addValue(boredLevel, -5);
+        trustLevel = addValue(trustLevel, +5);
     }
 
     /**
@@ -110,10 +116,11 @@ public class Dog {
      *
      * @return true if the dog comes to you. false if not.
      */
-    public boolean callTheDog() {
-        System.out.println("You call " + name + " and wait for her to come over.");
-
-        return false;
+    public void callTheDog() {
+        trustLevel = addValue(trustLevel, +5);
+        emotion = Emotion.EXCITED;
+        boredLevel = addValue(boredLevel, -5);
+        lonelyLevel = addValue(lonelyLevel, -5);
     }
 
     @Override
@@ -200,9 +207,9 @@ public class Dog {
 
     public void displayHealth() {
         System.out.println("Name: " + name);
-        System.out.println("==================================================");
+        System.out.println("======================================================");
         System.out.println("HitPoints: " + hitPoints);
-        System.out.print("Energy: " + (100-tiredLevel));
+        System.out.print("Energy: " + (100 - tiredLevel));
         System.out.print("\tLove: " + trustLevel);
         System.out.print("\tHydration: " + thirstLevel);
         System.out.println("\tEmotion: " + emotion);
@@ -210,7 +217,27 @@ public class Dog {
         System.out.print("\tHunger: " + hungerLevel);
         System.out.print("\tBoredom: " + boredLevel);
         System.out.println("\tLoneliness: " + lonelyLevel);
-        System.out.println("==================================================");
+        System.out.println("======================================================");
+    }
+
+    private int addValue(int base, int value) {
+        int sum = base + value;
+        if (sum < 0) {
+            return 0;
+        }
+        if (sum > 100) {
+            return 100;
+        }
+        return sum;
+    }
+
+    public void playFetch() {
+        boredLevel = addValue(boredLevel, +5);
+        emotion = Emotion.BORED;
+    }
+    public void giveWater() {
+        trustLevel = addValue(trustLevel, +5);
+        thirstLevel = 0;
     }
 }
 
