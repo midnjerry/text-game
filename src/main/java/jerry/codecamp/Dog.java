@@ -47,6 +47,9 @@ public class Dog {
         if (hitPoints <= 0) {
             killDog();
         }
+        if (emotion == Emotion.SICK) {
+            hitPoints = addValue(hitPoints, -10);
+        }
     }
 
     public void petTheDog() {
@@ -58,6 +61,10 @@ public class Dog {
     }
 
     public void giveTheDogASnack() {
+
+        if (hungerLevel == 0) {
+            emotion = Emotion.SICK;
+        }
         hungerLevel = addValue(hungerLevel, -10);
         lonelyLevel = addValue(lonelyLevel, -10);
         dirtyLevel = addValue(dirtyLevel, +5);
@@ -65,7 +72,6 @@ public class Dog {
         boredLevel = addValue(boredLevel, -5);
         trustLevel = addValue(trustLevel, +5);
     }
-
 
     public void giveWater() {
         trustLevel = addValue(trustLevel, +5);
@@ -106,8 +112,8 @@ public class Dog {
         hitPoints = addValue(hitPoints, -20);
         dirtyLevel = addValue(dirtyLevel, +5);
         lonelyLevel = addValue(lonelyLevel, +5);
-        if(emotion == Emotion.MAD && trustLevel < 10) {
-            emotion= Emotion.RABID;
+        if (emotion == Emotion.MAD && trustLevel < 10) {
+            emotion = Emotion.RABID;
             return;
         }
 
@@ -117,6 +123,10 @@ public class Dog {
         } else {
             emotion = Emotion.MAD;
         }
+    }
+
+    public void giveMedicine() {
+        emotion = Emotion.SAD;
     }
 
     private int addValue(int base, int value) {
@@ -133,6 +143,7 @@ public class Dog {
     public boolean isAlive() {
         return isAlive;
     }
+
     public String getName() {
         return name;
     }

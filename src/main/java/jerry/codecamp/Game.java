@@ -35,7 +35,7 @@ public class Game {
         }
         if (dog.getEmotion() == Emotion.RABID) {
             shouldGameRun = false;
-            System.out.println("Game Over!!");
+            System.out.println(dog.getName() + " adorably tears you limb from limb!! Game over LOSER");
 
         }
     }
@@ -57,7 +57,8 @@ public class Game {
         System.out.println("5. Call " + dog.getName());
         System.out.println("6. Play fetch with " + dog.getName());
         System.out.println("7. Take " + dog.getName() + " for a walk");
-        System.out.println("8. Beat the " + dog.getName());
+        System.out.println("8. Beat " + dog.getName());
+        System.out.println("9. Give " + dog.getName() + " medicine");
         System.out.println("Q. Quit the game");
 
         String selection = scanner.nextLine();
@@ -92,6 +93,10 @@ public class Game {
             case ("8"):
                 dog.beatDog();
                 System.out.println("you hit " + dog.getName());
+                break;
+            case ("9"):
+                System.out.println("You give " + dog.getName() +  " medicine");
+                dog.giveMedicine();
                 break;
             case ("q"):
             case ("Q"):
