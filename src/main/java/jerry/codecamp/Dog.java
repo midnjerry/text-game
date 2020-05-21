@@ -18,7 +18,6 @@ public class Dog {
     private boolean isNeutered;
     private boolean isAlive;
 
-
     public Dog(String name, Gender gender) {
         hitPoints = 100;
         emotion = Emotion.HAPPY;
@@ -36,49 +35,6 @@ public class Dog {
         this.isAlive = true;
     }
 
-    public boolean isAlive() {
-        return isAlive;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void giveBath() {
-        dirtyLevel = 0;
-        tiredLevel = addValue(tiredLevel, +5);
-        trustLevel = addValue(trustLevel, -5);
-
-        emotion = Emotion.MAD;
-        if (trustLevel > 90) {
-            emotion = Emotion.BORED;
-        } else if (trustLevel > 50) {
-            emotion = Emotion.ANXIOUS;
-        }
-
-
-    }
-
-
-
-    public void beatDog() {
-        hitPoints = addValue(hitPoints, -20);
-        dirtyLevel = addValue(dirtyLevel, +5);
-        lonelyLevel = addValue(lonelyLevel, +5);
-        if(emotion == Emotion.MAD && trustLevel < 10) {
-            emotion= Emotion.RABID;
-            return;
-        }
-
-        trustLevel = addValue(trustLevel, -30);
-        if (trustLevel > 50) {
-            emotion = Emotion.SAD;
-        } else {
-            emotion = Emotion.MAD;
-        }
-
-    }
-
     public void timePassesForDog() {
         System.out.println("Time passes for " + name + "!");
         boredLevel = addValue(boredLevel, +5);
@@ -91,21 +47,6 @@ public class Dog {
         if (hitPoints <= 0) {
             killDog();
         }
-    }
-
-    public void killDog() {
-        isAlive = false;
-
-    }
-
-    public void takeAWalk() {
-        tiredLevel = addValue(tiredLevel, -5);
-        dirtyLevel = addValue(dirtyLevel, +5);
-        thirstLevel = addValue(thirstLevel, +25);
-        hungerLevel = addValue(hungerLevel, +20);
-        lonelyLevel = 0;
-        boredLevel = 0;
-        trustLevel = addValue(trustLevel, +5);
     }
 
     public void petTheDog() {
@@ -126,6 +67,19 @@ public class Dog {
     }
 
 
+    public void giveWater() {
+        trustLevel = addValue(trustLevel, +5);
+        thirstLevel = 0;
+    }
+
+    public void giveBath() {
+        dirtyLevel = 0;
+        tiredLevel = addValue(tiredLevel, +5);
+        emotion = Emotion.MAD;
+        trustLevel = addValue(trustLevel, -5);
+        thirstLevel = addValue(thirstLevel, -2);
+    }
+
     public void callTheDog() {
         trustLevel = addValue(trustLevel, +5);
         emotion = Emotion.EXCITED;
@@ -133,26 +87,79 @@ public class Dog {
         lonelyLevel = addValue(lonelyLevel, -5);
     }
 
-    @Override
-    public String toString() {
-        return "Dog{" +
-                "hitPoints=" + hitPoints +
-                ", emotion=" + emotion +
-                ", hungerLevel=" + hungerLevel +
-                ", thirstLevel=" + thirstLevel +
-                ", lonelyLevel=" + lonelyLevel +
-                ", tiredLevel=" + tiredLevel +
-                ", boredLevel=" + boredLevel +
-                ", dirtyLevel=" + dirtyLevel +
-                ", age=" + age +
-                ", name='" + name + '\'' +
-                ", gender=" + gender +
-                ", isNeutered=" + isNeutered +
-                '}';
+    public void playFetch() {
+        boredLevel = addValue(boredLevel, +5);
+        emotion = Emotion.BORED;
+    }
+
+    public void takeAWalk() {
+        tiredLevel = addValue(tiredLevel, -5);
+        dirtyLevel = addValue(dirtyLevel, +5);
+        thirstLevel = addValue(thirstLevel, +25);
+        hungerLevel = addValue(hungerLevel, +20);
+        lonelyLevel = 0;
+        boredLevel = 0;
+        trustLevel = addValue(trustLevel, +5);
+    }
+
+    public void beatDog() {
+        hitPoints = addValue(hitPoints, -20);
+        dirtyLevel = addValue(dirtyLevel, +5);
+        lonelyLevel = addValue(lonelyLevel, +5);
+        if(emotion == Emotion.MAD && trustLevel < 10) {
+            emotion= Emotion.RABID;
+            return;
+        }
+
+        trustLevel = addValue(trustLevel, -30);
+        if (trustLevel > 50) {
+            emotion = Emotion.SAD;
+        } else {
+            emotion = Emotion.MAD;
+        }
+    }
+
+    private int addValue(int base, int value) {
+        int sum = base + value;
+        if (sum < 0) {
+            return 0;
+        }
+        if (sum > 100) {
+            return 100;
+        }
+        return sum;
+    }
+
+    public boolean isAlive() {
+        return isAlive;
+    }
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public boolean isNeutered() {
+        return isNeutered;
+    }
+
+    public void killDog() {
+        isAlive = false;
+
     }
 
     public int getHitPoints() {
         return hitPoints;
+    }
+
+    public Emotion getEmotion() {
+        return emotion;
     }
 
     public int getHungerLevel() {
@@ -199,20 +206,22 @@ public class Dog {
         return trustLevel;
     }
 
-    public int getAge() {
-        return age;
-    }
-
-    public Emotion getEmotion() {
-        return emotion;
-    }
-
-    public Gender getGender() {
-        return gender;
-    }
-
-    public boolean isNeutered() {
-        return isNeutered;
+    @Override
+    public String toString() {
+        return "Dog{" +
+                "hitPoints=" + hitPoints +
+                ", emotion=" + emotion +
+                ", hungerLevel=" + hungerLevel +
+                ", thirstLevel=" + thirstLevel +
+                ", lonelyLevel=" + lonelyLevel +
+                ", tiredLevel=" + tiredLevel +
+                ", boredLevel=" + boredLevel +
+                ", dirtyLevel=" + dirtyLevel +
+                ", age=" + age +
+                ", name='" + name + '\'' +
+                ", gender=" + gender +
+                ", isNeutered=" + isNeutered +
+                '}';
     }
 
     public void displayHealth() {
@@ -230,26 +239,6 @@ public class Dog {
         System.out.println("======================================================");
     }
 
-    private int addValue(int base, int value) {
-        int sum = base + value;
-        if (sum < 0) {
-            return 0;
-        }
-        if (sum > 100) {
-            return 100;
-        }
-        return sum;
-    }
-
-    public void playFetch() {
-        boredLevel = addValue(boredLevel, +5);
-        emotion = Emotion.BORED;
-    }
-
-    public void giveWater() {
-        trustLevel = addValue(trustLevel, +5);
-        thirstLevel = 0;
-    }
 }
 
 
