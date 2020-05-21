@@ -47,21 +47,36 @@ public class Dog {
     public void giveBath() {
         dirtyLevel = 0;
         tiredLevel = addValue(tiredLevel, +5);
-        emotion = Emotion.MAD;
         trustLevel = addValue(trustLevel, -5);
-        thirstLevel = addValue(thirstLevel, -2);
+
+        emotion = Emotion.MAD;
+        if (trustLevel > 90) {
+            emotion = Emotion.BORED;
+        } else if (trustLevel > 50) {
+            emotion = Emotion.ANXIOUS;
+        }
+
+
     }
+
+
 
     public void beatDog() {
         hitPoints = addValue(hitPoints, -20);
+        dirtyLevel = addValue(dirtyLevel, +5);
+        lonelyLevel = addValue(lonelyLevel, +5);
+        if(emotion == Emotion.MAD && trustLevel < 10) {
+            emotion= Emotion.RABID;
+            return;
+        }
+
         trustLevel = addValue(trustLevel, -30);
         if (trustLevel > 50) {
             emotion = Emotion.SAD;
         } else {
             emotion = Emotion.MAD;
         }
-        dirtyLevel = addValue(dirtyLevel, +5);
-        lonelyLevel = addValue(lonelyLevel, +5);
+
     }
 
     public void timePassesForDog() {
@@ -94,11 +109,11 @@ public class Dog {
     }
 
     public void petTheDog() {
-       dirtyLevel = addValue(dirtyLevel, +1);
-       lonelyLevel = addValue(lonelyLevel, -5);
-       boredLevel = addValue(boredLevel, -5);
-       trustLevel = addValue(trustLevel, +10);
-       emotion = Emotion.HAPPY;
+        dirtyLevel = addValue(dirtyLevel, +1);
+        lonelyLevel = addValue(lonelyLevel, -5);
+        boredLevel = addValue(boredLevel, -5);
+        trustLevel = addValue(trustLevel, +10);
+        emotion = Emotion.HAPPY;
     }
 
     public void giveTheDogASnack() {
@@ -110,12 +125,7 @@ public class Dog {
         trustLevel = addValue(trustLevel, +5);
     }
 
-    /**
-     * This method attempts to call a dog and determines if
-     * it comes to you or not.
-     *
-     * @return true if the dog comes to you. false if not.
-     */
+
     public void callTheDog() {
         trustLevel = addValue(trustLevel, +5);
         emotion = Emotion.EXCITED;
@@ -235,6 +245,7 @@ public class Dog {
         boredLevel = addValue(boredLevel, +5);
         emotion = Emotion.BORED;
     }
+
     public void giveWater() {
         trustLevel = addValue(trustLevel, +5);
         thirstLevel = 0;

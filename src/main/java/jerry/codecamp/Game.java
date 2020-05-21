@@ -23,18 +23,22 @@ public class Game {
         while (shouldGameRun) {
             processTick();
             processMenu();
-            checkForDeath();
+            checkForGameOver();
         }
         System.out.println("Thanks for playing!");
     }
 
-    private void checkForDeath() {
+    private void checkForGameOver() {
         if (!dog.isAlive()) {
             shouldGameRun = false;
             System.out.println(dog.getName() + " is dead. :(");
         }
-    }
+        if (dog.getEmotion() == Emotion.RABID) {
+            shouldGameRun = false;
+            System.out.println("Game Over!!");
 
+        }
+    }
     private void processTick() {
         if (tickCounter == 3) {
             dog.timePassesForDog();
