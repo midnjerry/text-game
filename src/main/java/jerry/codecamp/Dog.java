@@ -66,6 +66,7 @@ public class Dog {
         trustLevel = addValue(trustLevel, +5);
     }
 
+
     public void giveWater() {
         trustLevel = addValue(trustLevel, +5);
         thirstLevel = 0;
@@ -103,14 +104,19 @@ public class Dog {
 
     public void beatDog() {
         hitPoints = addValue(hitPoints, -20);
+        dirtyLevel = addValue(dirtyLevel, +5);
+        lonelyLevel = addValue(lonelyLevel, +5);
+        if(emotion == Emotion.MAD && trustLevel < 10) {
+            emotion= Emotion.RABID;
+            return;
+        }
+
         trustLevel = addValue(trustLevel, -30);
         if (trustLevel > 50) {
             emotion = Emotion.SAD;
         } else {
             emotion = Emotion.MAD;
         }
-        dirtyLevel = addValue(dirtyLevel, +5);
-        lonelyLevel = addValue(lonelyLevel, + 5);
     }
 
     private int addValue(int base, int value) {
