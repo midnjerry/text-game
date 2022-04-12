@@ -12,4 +12,5 @@ public enum Emotion {
     JEALOUS,
     BORED,
     RABID,
+    ANNOYED,
 }

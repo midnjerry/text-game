@@ -54,11 +54,12 @@ public class Game {
         System.out.println("2. Feed " + dog.getName());
         System.out.println("3. Give " + dog.getName() + " some water");
         System.out.println("4. Give " + dog.getName() + " a bath");
-        System.out.println("5. Call " + dog.getName());
-        System.out.println("6. Play fetch with " + dog.getName());
-        System.out.println("7. Take " + dog.getName() + " for a walk");
-        System.out.println("8. Beat " + dog.getName());
-        System.out.println("9. Give " + dog.getName() + " medicine");
+        System.out.println("5. have " + dog.getName() + " take a nap");
+        //System.out.println("6. Call " + dog.getName());
+        //System.out.println("7. Play fetch with " + dog.getName());
+        //System.out.println("8. Take " + dog.getName() + " for a walk");
+        System.out.println("9. Beat " + dog.getName());
+        System.out.println("10. Give " + dog.getName() + " medicine");
         System.out.println("Q. Quit the game");
 
         String selection = scanner.nextLine();
@@ -79,22 +80,26 @@ public class Game {
                 dog.giveBath();
                 break;
             case ("5"):
-                System.out.println("You call " + dog.getName() + " and wait for her to come over.");
-                dog.callTheDog();
+                System.out.println(dog.getName() + " is taking a nap");
+                dog.takeNap();
                 break;
-            case ("6"):
-                System.out.println(dog.getName() + " looks at the toy, looks at you, then goes back to sleep.");
-                dog.playFetch();
-                break;
-            case ("7"):
-                dog.takeAWalk();
-                System.out.println("You take " + dog.getName() + " for a walk");
-                break;
-            case ("8"):
-                dog.beatDog();
-                System.out.println("you hit " + dog.getName());
-                break;
+           // case("6"):
+               // System.out.println("You call " + dog.getName() + " and wait for her to come over.");
+              //  dog.callTheDog();
+               // break;
+           // case ("7"):
+            //   System.out.println(dog.getName() + " looks at the toy, looks at you, then goes back to sleep.");
+              //  dog.playFetch();
+              //  break;
+           // case ("8"):
+              //  System.out.println("You take " + dog.getName() + " for a walk");
+               // dog.takeAWalk();
+              //  break;
             case ("9"):
+                System.out.println("you hit " + dog.getName());
+                dog.beatDog();
+                break;
+            case ("10"):
                 System.out.println("You give " + dog.getName() +  " medicine");
                 dog.giveMedicine();
                 break;

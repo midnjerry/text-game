@@ -58,6 +58,9 @@ public class Dog {
         boredLevel = addValue(boredLevel, -5);
         trustLevel = addValue(trustLevel, +10);
         emotion = Emotion.HAPPY;
+        if (tiredLevel < 40) {
+            emotion = Emotion.MAD;
+        }
     }
 
     public void giveTheDogASnack() {
@@ -65,7 +68,7 @@ public class Dog {
         if (hungerLevel == 0) {
             emotion = Emotion.SICK;
         }
-        hungerLevel = addValue(hungerLevel, -10);
+        hungerLevel = 0;
         lonelyLevel = addValue(lonelyLevel, -10);
         dirtyLevel = addValue(dirtyLevel, +5);
         thirstLevel = addValue(thirstLevel, +5);
@@ -86,20 +89,34 @@ public class Dog {
         thirstLevel = addValue(thirstLevel, -2);
     }
 
+    public void takeNap() {
+        tiredLevel = 0;
+        hungerLevel = addValue(hungerLevel, +5);
+        thirstLevel = addValue(thirstLevel, +5);
+        dirtyLevel = addValue(dirtyLevel, +2);
+        boredLevel = addValue(boredLevel, +5);
+    }
+
     public void callTheDog() {
         trustLevel = addValue(trustLevel, +5);
         emotion = Emotion.EXCITED;
         boredLevel = addValue(boredLevel, -5);
         lonelyLevel = addValue(lonelyLevel, -5);
+        if (tiredLevel < 40) {
+            emotion = Emotion.ANNOYED;
+        }
     }
 
     public void playFetch() {
         boredLevel = addValue(boredLevel, +5);
         emotion = Emotion.BORED;
+        if (emotion == Emotion.HAPPY){
+            emotion = Emotion.CURIOUS;
+        }
     }
 
     public void takeAWalk() {
-        tiredLevel = addValue(tiredLevel, -5);
+        tiredLevel = addValue(tiredLevel, +10);
         dirtyLevel = addValue(dirtyLevel, +5);
         thirstLevel = addValue(thirstLevel, +25);
         hungerLevel = addValue(hungerLevel, +20);
@@ -239,7 +256,7 @@ public class Dog {
         System.out.println("Name: " + name);
         System.out.println("======================================================");
         System.out.println("HitPoints: " + hitPoints);
-        System.out.print("Energy: " + (100 - tiredLevel));
+        System.out.print("Fatigue: " + (tiredLevel));
         System.out.print("\tLove: " + trustLevel);
         System.out.print("\tHydration: " + thirstLevel);
         System.out.println("\tEmotion: " + emotion);
